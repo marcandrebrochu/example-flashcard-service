@@ -1,11 +1,3 @@
-## Purpose
-
-This repository contains a simple example of a "full-stack" API.
-My hope for this project is that it can...
-
-1. ...demonstrate useful patterns and ideas;
-2. ...set a bunch of comparison points, to track my future progress as a software developer.
-
 ## Concept
 
 This demo is a flashcard service.
@@ -29,7 +21,7 @@ see the following links for details:
 - [TypeScript implementation](https://github.com/open-spaced-repetition/ts-fsrs/blob/52d24e84cb5dc85d87852ada48648c01e6a20246/packages/fsrs/src/algorithm.ts)
 - [FSRS visualizer](https://open-spaced-repetition.github.io/anki_fsrs_visualizer) (that I used for getting test values)
 - [Official algorithm documentation](https://github.com/open-spaced-repetition/awesome-fsrs/wiki/The-Algorithm)
-- [Alternative (and IMO better) doc](https://expertium.github.io/Algorithm.html)
+- [Alternative doc](https://expertium.github.io/Algorithm.html)
 - At the end of this file, I tried to summarize the underlying mathematical model used by FSRS.
   You can also find a more expansive description in [the official docs](https://github.com/open-spaced-repetition/awesome-fsrs/wiki/Spaced-Repetition-Algorithm:-A-Three%E2%80%90Day-Journey-from-Novice-to-Expert#the-three-component-model-of-memory).
 
