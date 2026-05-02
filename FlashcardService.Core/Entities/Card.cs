@@ -39,7 +39,7 @@ public sealed class Card(Guid id, string front, string back) : Entity(id)
         }
         else
         {
-            if (now.CompareTo(LastGradingDate.Value) < 0)
+            if (now.CompareTo(LastGradingDate.Value) <= 0)
                 throw new DomainException("grading a card may only happen chronologically");
 
             var (S, D) = _state;
