@@ -4,10 +4,10 @@ using FlashcardService.Core.Exceptions;
 
 namespace FlashcardService.Core.Entities;
 
-public sealed class Deck(Guid id, string name) : Entity(id), IReadOnlyList<Card>
+public sealed class Deck : Entity, IReadOnlyList<Card>
 {
     private readonly List<Card> _cards = [];
-    
+
     public int Count => _cards.Count;
 
     public Card this[int index] => _cards[index];
@@ -22,7 +22,12 @@ public sealed class Deck(Guid id, string name) : Entity(id), IReadOnlyList<Card>
 
             field = value;
         }
-    } = name;
+    }
+    
+    public Deck(Guid id, string name) : base(id)
+    {
+        Name = name;
+    }
 
     public IEnumerator<Card> GetEnumerator()
     {

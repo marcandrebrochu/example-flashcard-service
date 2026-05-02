@@ -54,4 +54,24 @@ public class DeckTests
         Assert.NotNull(exception);
         Assert.IsType<DomainException>(exception);
     }
+
+    [Fact]
+    public void NotAllowEmptyNameOnConstruction()
+    {
+        var exception = Record.Exception(() => new Deck(Guid.NewGuid(), ""));
+        
+        Assert.NotNull(exception);
+        Assert.IsType<DomainException>(exception);
+    }
+
+    [Fact]
+    public void NotAllowSettingEmptyName()
+    {
+        var deck = new Deck(Guid.NewGuid(), "Test deck");
+
+        var exception = Record.Exception(() => deck.Name = "");
+        
+        Assert.NotNull(exception);
+        Assert.IsType<DomainException>(exception);
+    }
 }
