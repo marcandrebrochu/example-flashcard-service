@@ -12,11 +12,17 @@ public sealed class Deck(Guid id, string name) : Entity(id), IReadOnlyList<Card>
 
     public Card this[int index] => _cards[index];
 
-    public string Name => name;
-
-    public Deck(string name) : this(Guid.NewGuid(), name)
+    public string Name
     {
-    }
+        get;
+        set
+        {
+            if (string.IsNullOrEmpty(value))
+                throw new DomainException("a deck must have a name");
+
+            field = value;
+        }
+    } = name;
 
     public IEnumerator<Card> GetEnumerator()
     {

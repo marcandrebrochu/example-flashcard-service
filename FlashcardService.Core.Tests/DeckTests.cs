@@ -8,7 +8,7 @@ public class DeckTests
     [Fact]
     public void ShouldAddCard()
     {
-        var deck = new Deck("Test deck");
+        var deck = new Deck(Guid.NewGuid(), "Test deck");
         
         var card = deck.AddCard("Front", "Back");
 
@@ -19,7 +19,7 @@ public class DeckTests
     [Fact]
     public void ShouldNotAllowAddingCardsWithSameFront()
     {
-        var deck = new Deck("Test deck");
+        var deck = new Deck(Guid.NewGuid(), "Test deck");
 
         var exception = Record.Exception(() =>
         {
@@ -34,7 +34,7 @@ public class DeckTests
     [Fact]
     public void ShouldUpdateCardFront()
     {
-        var deck = new Deck("Test deck");
+        var deck = new Deck(Guid.NewGuid(), "Test deck");
         var card = deck.AddCard("Front (original)", "Back");
 
         deck.UpdateCardFront(card, "Front (new)");
@@ -45,7 +45,7 @@ public class DeckTests
     [Fact]
     public void ShouldNotAllowUpdatingCardFrontToDuplicate()
     {
-        var deck = new Deck("Test deck");
+        var deck = new Deck(Guid.NewGuid(), "Test deck");
         var card = deck.AddCard("Front 1", "Back");
         _ = deck.AddCard("Front 2", "Back");
         
