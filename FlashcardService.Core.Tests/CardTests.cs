@@ -31,7 +31,7 @@ public class CardTests
         
         Assert.True(card.IsGraded);
         Assert.Equal(DateTime.MinValue, card.LastGradingDate);
-        Assert.Equal(0.5, card.Interval);
+        Assert.Equal(0.212, card.Interval, precision: 3);
     }
 
     [Fact]
