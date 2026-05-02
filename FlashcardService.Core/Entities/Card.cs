@@ -93,17 +93,7 @@ public sealed class Card(Guid id, string front, string back) : Entity(id)
         LastGradingDate = now;
     }
 
-    // TODO: properties are something every object should have, thus make this one return double? instead of throwing...
-    public double Stability
-    {
-        get
-        {
-            if (_state is null)
-                throw new DomainException("only cards that have been reviewed have a stability");
-
-            return _state.Stability;
-        }
-    }
+    public double Interval => (_state?.Stability).GetValueOrDefault(0);
 
     public bool IsReadyForReview(DateTime now)
     {

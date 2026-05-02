@@ -6,19 +6,12 @@ namespace FlashcardService.Core.Tests;
 
 public class CardTests
 {
-    // I don't really like the fact the type doesn't tell you if a card is new or not.
-    // Imagine a list of cards (i.e. of Card objects). Imagine you're looping through it, computing something related to
-    // their stability. If any of those cards have not been "initialized" (i.e. their GiveInitialGrade not called), then
-    // the loop will throw a runtime exception. Such a list could not exist if their init state was tracked by the type.
     [Fact]
-    public void NewCardHasNoStability()
+    public void NewCardHasZeroInterval()
     {
         var card = new Card(Guid.NewGuid(), "Front", "Back");
-
-        var exception = Record.Exception(() => _ = card.Stability);
         
-        Assert.NotNull(exception);
-        Assert.IsType<DomainException>(exception);
+        Assert.Equal(0, card.Interval);
     }
 
     [Fact]
@@ -38,7 +31,7 @@ public class CardTests
         
         Assert.True(card.IsGraded);
         Assert.Equal(DateTime.MinValue, card.LastGradingDate);
-        Assert.Equal(0.5, card.Stability);
+        Assert.Equal(0.5, card.Interval);
     }
 
     [Fact]
@@ -58,7 +51,7 @@ public class CardTests
         
         card.Grade(CardGrade.Easy, new DateTime(0));
         
-        Assert.True(card.IsReadyForReview(new DateTime(TimeSpan.FromDays(card.Stability).Ticks)));
+        Assert.True(card.IsReadyForReview(new DateTime(TimeSpan.FromDays(card.Interval).Ticks)));
     }
 
     [Fact]
@@ -94,13 +87,13 @@ public class CardTests
         for (var i = 0; i < 4; i++)
         {
             card.Grade(ConvertToCardGrade(grades[i]), new DateTime(TimeSpan.FromDays(daysElapsed).Ticks));
-            calculated[i] = card.Stability;
+            calculated[i] = card.Interval;
 
             const double decay = -0.1542;
             var decayFactor = Math.Round(Math.Exp(Math.Pow(decay, -1) * Math.Log(0.9)) - 1, 8);
             var intervalModifier = Math.Round((Math.Pow(0.9, 1 / decay) - 1) / decayFactor, 8);
             var interval = Math.Min(
-                Math.Max(1, Math.Round(card.Stability * intervalModifier)),
+                Math.Max(1, Math.Round(card.Interval * intervalModifier)),
                 36500); // 36500 = default max interval
             
             daysElapsed += interval;
