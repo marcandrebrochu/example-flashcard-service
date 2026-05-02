@@ -4,7 +4,7 @@ using FlashcardService.Core.Exceptions;
 
 namespace FlashcardService.Core.Entities;
 
-public sealed class Deck(Guid id) : Entity(id), IReadOnlyList<Card>
+public sealed class Deck(Guid id, string name) : Entity(id), IReadOnlyList<Card>
 {
     private readonly List<Card> _cards = [];
     
@@ -12,7 +12,9 @@ public sealed class Deck(Guid id) : Entity(id), IReadOnlyList<Card>
 
     public Card this[int index] => _cards[index];
 
-    public Deck() : this(Guid.NewGuid())
+    public string Name => name;
+
+    public Deck(string name) : this(Guid.NewGuid(), name)
     {
     }
 
