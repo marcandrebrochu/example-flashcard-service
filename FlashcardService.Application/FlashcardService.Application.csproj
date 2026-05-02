@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\FlashcardService.Core\FlashcardService.Core.csproj" />
+    </ItemGroup>
+
 </Project>
