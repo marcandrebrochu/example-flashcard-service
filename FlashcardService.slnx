@@ -6,4 +6,5 @@
   <Project Path="FlashcardService.Application/FlashcardService.Application.csproj" />
   <Project Path="FlashcardService.Core.Tests/FlashcardService.Core.Tests.csproj" />
   <Project Path="FlashcardService.Core/FlashcardService.Core.csproj" />
+  <Project Path="FlashcardService.Infrastructure/FlashcardService.Infrastructure.csproj" />
 </Solution>
