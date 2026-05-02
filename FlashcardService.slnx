@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="FlashcardService.API/FlashcardService.API.csproj" />
+  <Project Path="FlashcardService.Core.Tests/FlashcardService.Core.Tests.csproj" />
+  <Project Path="FlashcardService.Core/FlashcardService.Core.csproj" />
+</Solution>
