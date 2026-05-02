@@ -7,7 +7,7 @@ Each flashcard presents an atomic piece of information that you want to remember
 Hence, a major part of this software consists of a simple CRUD for flashcards, or decks of them.
 But that's not all.
 
-As your deck of flashcards grows, a major question crops up: how should you choose which card to review?
+As a deck of flashcards grows, a major question crops up: how should you choose which card to review?
 If you randomly pick cards from your deck, then you're not taking into account the fact you will naturally remember some cards better than other cards.
 You'll review easy ones needlessly often; the answers to the more difficult cards you'll forget evermore.
 No progress in your study will be made this way.
