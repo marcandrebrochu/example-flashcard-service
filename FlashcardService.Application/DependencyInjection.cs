@@ -1,5 +1,7 @@
 using System.Reflection;
 using FlashcardService.Application.Common.Behaviors;
+using FlashcardService.Application.Common.Interfaces;
+using FlashcardService.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -15,5 +17,7 @@ public static class DependencyInjection
             config.AddOpenRequestPreProcessor(typeof(LoggingBehavior<>));
             config.AddOpenBehavior(typeof(PerformanceBehavior<,>));
         });
+
+        builder.Services.AddSingleton<IIdentifierService, IdentifierService>();
     }
 }
