@@ -1,7 +1,7 @@
 using System.Reflection;
+using FlashcardService.Application.Common.Behaviors;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace FlashcardService.Application;
 
@@ -12,6 +12,8 @@ public static class DependencyInjection
         builder.Services.AddMediatR(config =>
         {
             config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+            config.AddOpenRequestPreProcessor(typeof(LoggingBehavior<>));
+            config.AddOpenBehavior(typeof(PerformanceBehavior<,>));
         });
     }
 }
