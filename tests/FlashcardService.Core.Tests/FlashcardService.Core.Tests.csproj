@@ -19,7 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\FlashcardService.Core\FlashcardService.Core.csproj" />
+      <ProjectReference Include="..\..\src\FlashcardService.Core\FlashcardService.Core.csproj" />
     </ItemGroup>
 
 </Project>

@@ -2,10 +2,14 @@
   <Folder Name="/Solution Items/">
     <File Path="README.md" />
   </Folder>
-  <Project Path="FlashcardService.API/FlashcardService.API.csproj" />
-  <Project Path="FlashcardService.Application.Tests/FlashcardService.Application.Tests.csproj" />
-  <Project Path="FlashcardService.Application/FlashcardService.Application.csproj" />
-  <Project Path="FlashcardService.Core.Tests/FlashcardService.Core.Tests.csproj" />
-  <Project Path="FlashcardService.Core/FlashcardService.Core.csproj" />
-  <Project Path="FlashcardService.Infrastructure/FlashcardService.Infrastructure.csproj" />
+  <Folder Name="/src/">
+    <Project Path="src/FlashcardService.API/FlashcardService.API.csproj" />
+    <Project Path="src/FlashcardService.Application/FlashcardService.Application.csproj" />
+    <Project Path="src/FlashcardService.Core/FlashcardService.Core.csproj" />
+    <Project Path="src/FlashcardService.Infrastructure/FlashcardService.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/FlashcardService.Application.Tests/FlashcardService.Application.Tests.csproj" />
+    <Project Path="tests/FlashcardService.Core.Tests/FlashcardService.Core.Tests.csproj" />
+  </Folder>
 </Solution>
