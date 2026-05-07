@@ -1,7 +1,3 @@
-using System.Diagnostics;
-using FlashcardService.Core.Entities;
-using FlashcardService.Core.Values;
-
 namespace FlashcardService.Core.Services;
 
 public class CardSelectionService
