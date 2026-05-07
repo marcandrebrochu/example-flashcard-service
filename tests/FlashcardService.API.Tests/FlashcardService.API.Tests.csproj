@@ -25,4 +25,8 @@
       <ProjectReference Include="..\..\src\FlashcardService.API\FlashcardService.API.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="snapshots\" />
+    </ItemGroup>
+
 </Project>

@@ -1,4 +1,3 @@
-using System.Data.Common;
 using System.Net;
 using FlashcardService.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
@@ -9,18 +8,19 @@ using Testcontainers.PostgreSql;
 
 namespace FlashcardService.API.Tests;
 
+// ReSharper disable once ClassNeverInstantiated.Global
 public sealed class PostgreSqlTests : IAsyncLifetime
 {
     private readonly PostgreSqlContainer _postgres = new PostgreSqlBuilder("postgres:18.3-alpine").Build();
     
-    public Task InitializeAsync()
+    public async ValueTask InitializeAsync()
     {
-        return _postgres.StartAsync();
+        await _postgres.StartAsync();
     }
 
-    public Task DisposeAsync()
+    public async ValueTask DisposeAsync()
     {
-        return _postgres.DisposeAsync().AsTask();
+        await _postgres.DisposeAsync();
     }
 
     public sealed class DeckControllerTests : IClassFixture<PostgreSqlTests>, IDisposable, IAsyncDisposable
@@ -67,9 +67,12 @@ public sealed class PostgreSqlTests : IAsyncLifetime
         [Fact]
         public async Task FirstTestUsingTestContainers()
         {
-            var response = await _client.GetAsync("/decks");
+            var response = await _client.GetAsync("/decks", TestContext.Current.CancellationToken);
+            
+            var json = await response.Content.ReadAsStringAsync(TestContext.Current.CancellationToken);
             
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            await Verify(json);
         }
     }
 }
