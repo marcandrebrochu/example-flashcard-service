@@ -1,5 +1,7 @@
 using FlashcardService.Application.Common.Dtos;
+using FlashcardService.Application.Common.Errors;
 using FlashcardService.Application.Decks.Commands.CreateDeck;
+using FlashcardService.Application.Decks.Queries.GetDeckById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,7 +20,13 @@ public sealed class DeckController(IMediator mediator) : ControllerBase
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<DeckDto>> GetDeckById(Guid id)
     {
-        return NotFound();
+        var query = new GetDeckByIdQuery(id);
+        var result = await mediator.Send(query);
+
+        if (result.HasError<NotFoundError>())
+            return NotFound();
+
+        return Ok(result.Value);
     }
 
     [HttpPost]
