@@ -9,6 +9,7 @@
     <Project Path="src/FlashcardService.Infrastructure/FlashcardService.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/FlashcardService.API.Tests/FlashcardService.API.Tests.csproj" />
     <Project Path="tests/FlashcardService.Application.Tests/FlashcardService.Application.Tests.csproj" />
     <Project Path="tests/FlashcardService.Core.Tests/FlashcardService.Core.Tests.csproj" />
   </Folder>
