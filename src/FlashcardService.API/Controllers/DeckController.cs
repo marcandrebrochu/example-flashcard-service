@@ -1,5 +1,6 @@
 using FlashcardService.Application.Common.Dtos;
 using FlashcardService.Application.Common.Errors;
+using FlashcardService.Application.Common.Interfaces;
 using FlashcardService.Application.Decks.Commands.CreateDeck;
 using FlashcardService.Application.Decks.Queries.GetDeckById;
 using MediatR;
@@ -9,12 +10,15 @@ namespace FlashcardService.API.Controllers;
 
 [ApiController]
 [Route("decks")]
-public sealed class DeckController(IMediator mediator) : ControllerBase
+public sealed class DeckController(
+    IDeckRepository deckRepository,
+    IMediator mediator) : ControllerBase
 {
     [HttpGet]
     public async Task<ActionResult<IEnumerable<DeckDto>>> GetAllDecks()
     {
-        return Ok((IEnumerable<DeckDto>)[]);
+        var allDecks = await deckRepository.FindAllDecksAsync();
+        return Ok(allDecks);
     }
 
     [HttpGet("{id:guid}")]

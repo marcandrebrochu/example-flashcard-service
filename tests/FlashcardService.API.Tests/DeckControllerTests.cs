@@ -1,5 +1,7 @@
 using System.Net;
+using FlashcardService.Application.Common.Interfaces;
 using FlashcardService.Infrastructure;
+using FlashcardService.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -57,6 +59,7 @@ public sealed class PostgreSqlTests : IAsyncLifetime
             {
                 builder.ConfigureServices(services =>
                 {
+                    services.AddScoped<IDeckRepository, DeckRepository>();
                     // services.Remove(services.SingleOrDefault(service => typeof(DbContextOptions<ApplicationDbContext>) == service.ServiceType));
                     // services.Remove(services.SingleOrDefault(service => typeof(DbConnection) == service.ServiceType));
                     services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(_connectionString));
@@ -67,6 +70,10 @@ public sealed class PostgreSqlTests : IAsyncLifetime
         [Fact]
         public async Task FirstTestUsingTestContainers()
         {
+            using var scope = _waf.Services.CreateScope();
+            var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            await context.Database.MigrateAsync(TestContext.Current.CancellationToken);
+            
             var response = await _client.GetAsync("/decks", TestContext.Current.CancellationToken);
             
             var json = await response.Content.ReadAsStringAsync(TestContext.Current.CancellationToken);
