@@ -9,7 +9,7 @@ public class SessionTests
     public void InitiallyHaveNoCardsReviewed()
     {
         var deck = new Deck(Guid.NewGuid(), "Test deck");
-        var session = new Session(deck.Id);
+        var session = new Session(Guid.NewGuid(), deck.Id);
         
         Assert.Empty(session.ReviewedCards);
     }
@@ -18,7 +18,7 @@ public class SessionTests
     public void MarksAsReviewed()
     {
         var deck = new Deck(Guid.NewGuid(), "Test deck");
-        var session = new Session(deck.Id);
+        var session = new Session(Guid.NewGuid(), deck.Id);
         var card = deck.AddCard("When was Quebec City founded?", "July 3, 1608");
 
         session.MarkAsReviewed(card);
@@ -31,7 +31,7 @@ public class SessionTests
     public void PreventsMarkingAsReviewedTwice()
     {
         var deck = new Deck(Guid.NewGuid(), "Test deck");
-        var session = new Session(deck.Id);
+        var session = new Session(Guid.NewGuid(), deck.Id);
         var card = deck.AddCard("What is the name for a group of crows?", "Murder");
         
         var exception = Record.Exception(() =>

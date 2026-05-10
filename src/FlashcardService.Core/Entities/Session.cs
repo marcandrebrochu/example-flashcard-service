@@ -10,10 +10,6 @@ public sealed class Session(Guid id, Guid deckId) : Entity(id)
     public IReadOnlyCollection<Card> ReviewedCards => _reviewedCards;
 
     public Guid DeckId { get; } = deckId;
-    
-    public Session(Guid deckId) : this(Guid.NewGuid(), deckId)
-    {
-    }
 
     public void MarkAsReviewed(Card card)
     {
