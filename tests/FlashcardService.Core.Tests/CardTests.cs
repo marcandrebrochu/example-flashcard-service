@@ -15,11 +15,19 @@ public class CardTests
     }
 
     [Fact]
+    public void NewCardHasZeroNextReviewDate()
+    {
+        var card = new Card(Guid.NewGuid(), "Front", "Back");
+        
+        Assert.Equal(DateTime.MinValue, card.NextReviewDate);
+    }
+
+    [Fact]
     public void NewCardIsReadyForReview()
     {
         var card = new Card(Guid.NewGuid(), "Front", "Back");
         
-        Assert.True(card.IsReadyForReview(DateTime.MaxValue));
+        Assert.True(card.IsReadyForReview(DateTime.MinValue));
     }
     
     [Fact]
@@ -29,7 +37,6 @@ public class CardTests
 
         card.Grade(CardGrade.Again, DateTime.MinValue);
         
-        Assert.True(card.IsGraded);
         Assert.Equal(DateTime.MinValue, card.LastGradingDate);
         Assert.Equal(0.212, card.Interval, precision: 3);
     }

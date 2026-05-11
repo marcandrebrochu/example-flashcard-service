@@ -1,5 +1,6 @@
 using FlashcardService.Core.Entities;
 using FlashcardService.Core.Exceptions;
+using FlashcardService.Core.Values;
 
 namespace FlashcardService.Core.Tests;
 
@@ -73,5 +74,40 @@ public class DeckTests
         
         Assert.NotNull(exception);
         Assert.IsType<DomainException>(exception);
+    }
+
+    [Fact]
+    public void FindsCardsReadyForReview()
+    {
+        var deck = new Deck(Guid.NewGuid(), "Deck");
+        var card1 = deck.AddCard("Front 1", "Back");
+        var card2 = deck.AddCard("Front 2", "Back");
+        var card3 = deck.AddCard("Front 3", "Back");
+        
+        card3.Grade(CardGrade.Easy, new DateTime(ticks: 0));
+
+        var cardsReadyForReview = deck.GetCardsReadyForReview(new DateTime(ticks: 0));
+        
+        Assert.Equal(2, cardsReadyForReview.Count);
+        Assert.Equal(card1, cardsReadyForReview[0]);
+        Assert.Equal(card2, cardsReadyForReview[1]);
+    }
+    
+    [Fact]
+    public void FindsCardsReadyForReviewAfterInterval()
+    {
+        var deck = new Deck(Guid.NewGuid(), "Deck");
+        var card1 = deck.AddCard("Front 1", "Back");
+        var card2 = deck.AddCard("Front 2", "Back");
+        var card3 = deck.AddCard("Front 3", "Back");
+        
+        card3.Grade(CardGrade.Again, new DateTime(ticks: 0));
+
+        var cardsReadyForReview = deck.GetCardsReadyForReview(card3.NextReviewDate);
+        
+        Assert.Equal(3, cardsReadyForReview.Count);
+        Assert.Equal(card1, cardsReadyForReview[0]);
+        Assert.Equal(card2, cardsReadyForReview[1]);
+        Assert.Equal(card3, cardsReadyForReview[2]);
     }
 }

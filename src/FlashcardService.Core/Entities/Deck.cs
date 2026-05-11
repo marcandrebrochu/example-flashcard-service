@@ -60,6 +60,11 @@ public sealed class Deck : Entity, IReadOnlyList<Card>
 
         card.Front = frontNew;
     }
+    
+    public IReadOnlyList<Card> GetCardsReadyForReview(DateTime now)
+    {
+        return _cards.Where(card => card.IsReadyForReview(now)).ToList();
+    }
 
     private Card? CardWithFront(string front)
     {
