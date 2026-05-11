@@ -12,10 +12,20 @@ public static class CardReviewService
         _random = new Random(seed);
     }
 
-    public static Card FindCardToReview(Deck deck, Session session)
+    public static Card? FindCardToReview(Deck deck, Session session, DateTime now)
     {
         Debug.Assert(session.DeckId == deck.Id);
 
-        return deck[0];
+        var cardsReadyForReview = deck.GetCardsReadyForReview(now);
+        if (cardsReadyForReview.Count == 0)
+            return null;
+        
+        var unreviewedCardsReadyForReview = cardsReadyForReview.Where(card => !session.HasBeenReviewed(card)).ToList();
+        if (unreviewedCardsReadyForReview.Count == 0)
+            return null;
+        
+        var randomIndex = _random.Next(0, unreviewedCardsReadyForReview.Count);
+        
+        return unreviewedCardsReadyForReview[randomIndex];
     }
 }

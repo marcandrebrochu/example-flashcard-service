@@ -18,4 +18,9 @@ public sealed class Session(Guid id, Guid deckId) : Entity(id)
         
         _reviewedCards.Add(card);
     }
+
+    public bool HasBeenReviewed(Card card)
+    {
+        return _reviewedCards.Contains(card);
+    }
 }
