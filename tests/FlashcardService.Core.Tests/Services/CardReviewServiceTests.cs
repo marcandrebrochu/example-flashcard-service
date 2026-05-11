@@ -10,7 +10,7 @@ public sealed class CardReviewServiceTests
     public void FindsCardToReview()
     {
         var deck = new Deck(Guid.NewGuid(), "Deck");
-        var session = new Session(Guid.NewGuid(), deck.Id);
+        var session = new ReviewSession(Guid.NewGuid(), deck.Id);
         var card = deck.AddCard("Front", "Back");
         
         var cardToReview = CardReviewService.FindCardToReview(deck, session, new DateTime(ticks: 0));
@@ -23,7 +23,7 @@ public sealed class CardReviewServiceTests
     public void FindsOnlyCardsToReview()
     {
         var deck = new Deck(Guid.NewGuid(), "Deck");
-        var session = new Session(Guid.NewGuid(), deck.Id);
+        var session = new ReviewSession(Guid.NewGuid(), deck.Id);
         
         // Add 100 cards that we review immediately
         for (var i = 0; i < 100; i++)
@@ -45,7 +45,7 @@ public sealed class CardReviewServiceTests
     public void FindsNoCardsToReview()
     {
         var deck = new Deck(Guid.NewGuid(), "Deck");
-        var session = new Session(Guid.NewGuid(), deck.Id);
+        var session = new ReviewSession(Guid.NewGuid(), deck.Id);
         
         var cardToReview = CardReviewService.FindCardToReview(deck, session, new DateTime(ticks: 0));
         
@@ -56,7 +56,7 @@ public sealed class CardReviewServiceTests
     public void FindsOnlyUnreviewedCardsToReview()
     {
         var deck = new Deck(Guid.NewGuid(), "Deck");
-        var session = new Session(Guid.NewGuid(), deck.Id);
+        var session = new ReviewSession(Guid.NewGuid(), deck.Id);
         
         // Add 100 cards that we mark as reviewed immediately
         for (var i = 0; i < 100; i++)

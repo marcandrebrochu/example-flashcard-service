@@ -3,7 +3,7 @@ using FlashcardService.Core.Values;
 
 namespace FlashcardService.Core.Entities;
 
-public sealed class Session(Guid id, Guid deckId) : Entity(id)
+public sealed class ReviewSession(Guid id, Guid deckId) : Entity(id)
 {
     private readonly List<Card> _reviewedCards = [];
     

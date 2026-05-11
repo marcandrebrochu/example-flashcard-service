@@ -12,7 +12,7 @@ public static class CardReviewService
         _random = new Random(seed);
     }
 
-    public static Card? FindCardToReview(Deck deck, Session session, DateTime now)
+    public static Card? FindCardToReview(Deck deck, ReviewSession session, DateTime now)
     {
         Debug.Assert(session.DeckId == deck.Id);
 
